@@ -106,7 +106,7 @@ const BlockchainPage = () => {
         blockNumber: await provider.getBlockNumber(),
         gasPrice: ethers.formatUnits(await provider.getFeeData().then(fee => fee.gasPrice), 'gwei'),
         kjbContract: {
-          address: KJBContract.address,
+          address: checksumContractAddress,
           totalSupply,
           totalMinted,
           totalBurned
@@ -564,7 +564,7 @@ ${transferForm.amount} KJB가 성공적으로 전송되었습니다.`)
         <div className="info-box">
           <p><strong>토큰 이름:</strong> KJB Stable Coin</p>
           <p><strong>토큰 심볼:</strong> KJB</p>
-          <p><strong>컨트랙트 주소:</strong> {KJBContract.address}</p>
+          <p><strong>컨트랙트 주소:</strong> {import.meta.env.VITE_KJB_CONTRACT_ADDRESS || KJBContract.address}</p>
           <p><strong>초기 지급:</strong> 새로운 지갑마다 1000 KJB 지급</p>
           <p><strong>기능:</strong> 잔액 조회, 토큰 송금, 초기 지급 받기</p>
           <p><strong>네트워크:</strong> 프라이빗 블록체인 (Chain ID: {EXPECTED_CHAIN_ID})</p>
