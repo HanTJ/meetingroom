@@ -76,7 +76,9 @@ const BlockchainPage = () => {
       // KJB 컨트랙트 인스턴스 생성
       // .env 파일에서 실제 컨트랙트 주소 로드, 없으면 기본값 사용
       const contractAddress = import.meta.env.VITE_KJB_CONTRACT_ADDRESS || KJBContract.address
-      const kjbContract = new ethers.Contract(contractAddress, KJBContract.abi, provider)
+      // 체크섬 주소로 변환 (대소문자 정규화)
+      const checksumAddress = ethers.getAddress(contractAddress)
+      const kjbContract = new ethers.Contract(checksumAddress, KJBContract.abi, provider)
 
       // KJB 잔액 조회
       const kjbBalanceWei = await kjbContract.balanceOf(walletAddress)
@@ -155,7 +157,8 @@ const BlockchainPage = () => {
       const provider = new ethers.JsonRpcProvider(PRIVATE_NETWORK_URL)
       const signer = await provider.getSigner(walletAddress)
       const contractAddress = import.meta.env.VITE_KJB_CONTRACT_ADDRESS || KJBContract.address
-      const kjbContract = new ethers.Contract(contractAddress, KJBContract.abi, signer)
+      const checksumAddress = ethers.getAddress(contractAddress)
+      const kjbContract = new ethers.Contract(checksumAddress, KJBContract.abi, signer)
 
       // 초기 지급 실행
       const tx = await kjbContract.claimInitialGrant()
@@ -237,7 +240,8 @@ const BlockchainPage = () => {
       const provider = new ethers.JsonRpcProvider(PRIVATE_NETWORK_URL)
       const signer = await provider.getSigner(transferForm.fromAddress)
       const contractAddress = import.meta.env.VITE_KJB_CONTRACT_ADDRESS || KJBContract.address
-      const kjbContract = new ethers.Contract(contractAddress, KJBContract.abi, signer)
+      const checksumAddress = ethers.getAddress(contractAddress)
+      const kjbContract = new ethers.Contract(checksumAddress, KJBContract.abi, signer)
 
       // 잔액 확인
       const balance = await kjbContract.balanceOf(transferForm.fromAddress)

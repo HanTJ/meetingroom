@@ -88,7 +88,9 @@ const ReservationForm = ({ selectedRoom, onSubmit, onCancel, defaultFilters = nu
       const provider = new ethers.JsonRpcProvider(PRIVATE_NETWORK_URL)
       // .env 파일에서 실제 컨트랙트 주소 로드, 없으면 기본값 사용
       const contractAddress = import.meta.env.VITE_KJB_CONTRACT_ADDRESS || KJBContract.address
-      const contract = new ethers.Contract(contractAddress, KJBContract.abi, provider)
+      // 체크섬 주소로 변환 (대소문자 정규화)
+      const checksumAddress = ethers.getAddress(contractAddress)
+      const contract = new ethers.Contract(checksumAddress, KJBContract.abi, provider)
 
       const balance = await contract.balanceOf(formData.walletAddress)
       const balanceFormatted = parseFloat(ethers.formatEther(balance))
@@ -178,7 +180,8 @@ const ReservationForm = ({ selectedRoom, onSubmit, onCancel, defaultFilters = nu
       const provider = new ethers.JsonRpcProvider(PRIVATE_NETWORK_URL)
       const signer = await provider.getSigner(formData.walletAddress)
       const contractAddress = import.meta.env.VITE_KJB_CONTRACT_ADDRESS || KJBContract.address
-      const contract = new ethers.Contract(contractAddress, KJBContract.abi, signer)
+      const checksumAddress = ethers.getAddress(contractAddress)
+      const contract = new ethers.Contract(checksumAddress, KJBContract.abi, signer)
 
       const burnAmount = ethers.parseEther(kjbInfo.requiredKjb.toString())
       const tx = await contract.burn(burnAmount)
