@@ -32,9 +32,9 @@ const BlockchainPage = () => {
   const [claimSuccess, setClaimSuccess] = useState('')
 
   // 프라이빗 네트워크 설정
-  // 실제 운영 시 실제 프라이빗 네트워크 RPC URL 및 Chain ID로 교체 필요
-  const PRIVATE_NETWORK_URL = 'http://192.168.1.100:8545'
-  const EXPECTED_CHAIN_ID = 1234
+  // .env 파일에서 실제 네트워크 정보 로드, 없으면 기본값 사용
+  const PRIVATE_NETWORK_URL = import.meta.env.VITE_BLOCKCHAIN_URL || 'http://192.168.1.100:8545'
+  const EXPECTED_CHAIN_ID = parseInt(import.meta.env.VITE_CHAIN_ID) || 1234
 
   const validateAddress = (address) => {
     if (!address) {
@@ -74,7 +74,9 @@ const BlockchainPage = () => {
       const ethBalanceEther = ethers.formatEther(ethBalanceWei)
 
       // KJB 컨트랙트 인스턴스 생성
-      const kjbContract = new ethers.Contract(KJBContract.address, KJBContract.abi, provider)
+      // .env 파일에서 실제 컨트랙트 주소 로드, 없으면 기본값 사용
+      const contractAddress = import.meta.env.VITE_KJB_CONTRACT_ADDRESS || KJBContract.address
+      const kjbContract = new ethers.Contract(contractAddress, KJBContract.abi, provider)
 
       // KJB 잔액 조회
       const kjbBalanceWei = await kjbContract.balanceOf(walletAddress)
@@ -152,7 +154,8 @@ const BlockchainPage = () => {
       // KJB 컨트랙트와 상호작용
       const provider = new ethers.JsonRpcProvider(PRIVATE_NETWORK_URL)
       const signer = await provider.getSigner(walletAddress)
-      const kjbContract = new ethers.Contract(KJBContract.address, KJBContract.abi, signer)
+      const contractAddress = import.meta.env.VITE_KJB_CONTRACT_ADDRESS || KJBContract.address
+      const kjbContract = new ethers.Contract(contractAddress, KJBContract.abi, signer)
 
       // 초기 지급 실행
       const tx = await kjbContract.claimInitialGrant()
@@ -233,7 +236,8 @@ const BlockchainPage = () => {
       // KJB 전송
       const provider = new ethers.JsonRpcProvider(PRIVATE_NETWORK_URL)
       const signer = await provider.getSigner(transferForm.fromAddress)
-      const kjbContract = new ethers.Contract(KJBContract.address, KJBContract.abi, signer)
+      const contractAddress = import.meta.env.VITE_KJB_CONTRACT_ADDRESS || KJBContract.address
+      const kjbContract = new ethers.Contract(contractAddress, KJBContract.abi, signer)
 
       // 잔액 확인
       const balance = await kjbContract.balanceOf(transferForm.fromAddress)

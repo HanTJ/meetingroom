@@ -72,7 +72,52 @@ git clone https://github.com/HanTJ/meetingroom.git
 cd meetingroom
 ```
 
-### 2. 스마트 컨트랙트 배포 (선택사항)
+### 2. 환경 변수 설정
+
+#### Backend 환경 변수
+```bash
+cd backend
+cp .env.example .env
+# .env 파일을 열어 실제 블록체인 네트워크 정보로 수정
+```
+
+**backend/.env 파일 예시:**
+```env
+PORT=3001
+NODE_ENV=development
+
+# 실제 프라이빗 블록체인 네트워크 정보
+BLOCKCHAIN_URL=http://your-blockchain-rpc-url:8545
+CHAIN_ID=your-chain-id
+
+# 실제 배포된 컨트랙트 주소
+KJB_CONTRACT_ADDRESS=0xYourKJBContractAddress
+MEETING_ROOM_CONTRACT_ADDRESS=0xYourMeetingRoomContractAddress
+
+CLIENT_URL=http://localhost:5173
+```
+
+#### Frontend 환경 변수
+```bash
+cd front
+cp .env.example .env
+# .env 파일을 열어 실제 블록체인 네트워크 정보로 수정
+```
+
+**front/.env 파일 예시:**
+```env
+# 실제 프라이빗 블록체인 네트워크 정보
+VITE_BLOCKCHAIN_URL=http://your-blockchain-rpc-url:8545
+VITE_CHAIN_ID=your-chain-id
+
+# 실제 배포된 컨트랙트 주소
+VITE_KJB_CONTRACT_ADDRESS=0xYourKJBContractAddress
+VITE_MEETING_ROOM_CONTRACT_ADDRESS=0xYourMeetingRoomContractAddress
+
+VITE_API_URL=http://localhost:3001
+```
+
+### 3. 스마트 컨트랙트 배포 (선택사항)
 ```bash
 cd contract
 npm install
@@ -80,7 +125,7 @@ npm run compile
 npx hardhat run scripts/deploy.js --network privatePoA
 ```
 
-### 3. 백엔드 실행
+### 4. 백엔드 실행
 ```bash
 cd backend
 npm install
@@ -88,13 +133,17 @@ npm start
 ```
 백엔드 서버: http://localhost:3001
 
-### 4. 프론트엔드 실행
+**주의**: 백엔드 실행 시 `.env` 파일의 블록체인 네트워크 정보를 자동으로 로드합니다.
+
+### 5. 프론트엔드 실행
 ```bash
 cd front
 npm install
 npm run dev
 ```
 프론트엔드 서버: http://localhost:5173
+
+**주의**: 프론트엔드 실행 시 `.env` 파일의 블록체인 네트워크 정보를 자동으로 로드합니다.
 
 ## 📡 API 엔드포인트
 

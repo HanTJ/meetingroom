@@ -55,8 +55,8 @@ const ReservationForm = ({ selectedRoom, onSubmit, onCancel, defaultFilters = nu
 
   // KJB 토큰 단가 (시간당 10 KJB)
   const KJB_PER_HOUR = 10
-  // 실제 운영 시 실제 프라이빗 네트워크 RPC URL로 교체 필요
-  const PRIVATE_NETWORK_URL = 'http://192.168.1.100:8545'
+  // .env 파일에서 실제 네트워크 URL 로드, 없으면 기본값 사용
+  const PRIVATE_NETWORK_URL = import.meta.env.VITE_BLOCKCHAIN_URL || 'http://192.168.1.100:8545'
 
   // 시간 계산 및 KJB 소모량 계산
   useEffect(() => {
@@ -86,7 +86,9 @@ const ReservationForm = ({ selectedRoom, onSubmit, onCancel, defaultFilters = nu
   const checkKjbBalance = async () => {
     try {
       const provider = new ethers.JsonRpcProvider(PRIVATE_NETWORK_URL)
-      const contract = new ethers.Contract(KJBContract.address, KJBContract.abi, provider)
+      // .env 파일에서 실제 컨트랙트 주소 로드, 없으면 기본값 사용
+      const contractAddress = import.meta.env.VITE_KJB_CONTRACT_ADDRESS || KJBContract.address
+      const contract = new ethers.Contract(contractAddress, KJBContract.abi, provider)
 
       const balance = await contract.balanceOf(formData.walletAddress)
       const balanceFormatted = parseFloat(ethers.formatEther(balance))
@@ -175,7 +177,8 @@ const ReservationForm = ({ selectedRoom, onSubmit, onCancel, defaultFilters = nu
       // KJB 토큰 소각
       const provider = new ethers.JsonRpcProvider(PRIVATE_NETWORK_URL)
       const signer = await provider.getSigner(formData.walletAddress)
-      const contract = new ethers.Contract(KJBContract.address, KJBContract.abi, signer)
+      const contractAddress = import.meta.env.VITE_KJB_CONTRACT_ADDRESS || KJBContract.address
+      const contract = new ethers.Contract(contractAddress, KJBContract.abi, signer)
 
       const burnAmount = ethers.parseEther(kjbInfo.requiredKjb.toString())
       const tx = await contract.burn(burnAmount)

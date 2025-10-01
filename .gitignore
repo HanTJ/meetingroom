@@ -1,8 +1,13 @@
-# Environment variables
+# Environment variables (실제 운영 정보 포함)
 .env
 .env.production
 .env.local
 .env.*.local
+backend/.env
+front/.env
+
+# Keep example files for reference
+!**/.env.example
 
 # Dependencies
 node_modules/

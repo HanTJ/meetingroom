@@ -1,9 +1,9 @@
 const { ethers } = require('ethers')
 
 // KJB 컨트랙트 정보
-// 실제 운영 시 배포된 실제 컨트랙트 주소로 교체 필요
+// .env 파일에서 실제 컨트랙트 주소 로드, 없으면 기본값 사용
 const KJB_CONTRACT_INFO = {
-  address: '0x1234567890123456789012345678901234567890',
+  address: process.env.KJB_CONTRACT_ADDRESS || '0x1234567890123456789012345678901234567890',
   abi: [
     {
       "inputs": [
@@ -620,9 +620,9 @@ const KJB_CONTRACT_INFO = {
 }
 
 // 네트워크 설정
-// 실제 운영 시 실제 프라이빗 네트워크 RPC URL 및 Chain ID로 교체 필요
-const PRIVATE_NETWORK_URL = 'http://192.168.1.100:8545'
-const EXPECTED_CHAIN_ID = 1234
+// .env 파일에서 실제 네트워크 정보 로드, 없으면 기본값 사용
+const PRIVATE_NETWORK_URL = process.env.BLOCKCHAIN_URL || 'http://192.168.1.100:8545'
+const EXPECTED_CHAIN_ID = parseInt(process.env.CHAIN_ID) || 1234
 
 const kjbService = {
   // Provider 인스턴스 생성

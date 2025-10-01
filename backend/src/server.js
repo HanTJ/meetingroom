@@ -1,3 +1,6 @@
+// .env 파일 로드 (실제 운영 정보)
+require('dotenv').config()
+
 const { app, initializeApp } = require('./app')
 
 const PORT = process.env.PORT || 3001

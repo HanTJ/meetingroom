@@ -110,7 +110,7 @@ class ReservationService {
   async verifyWalletAuthentication(walletAddress, password) {
     try {
       // 블록체인 노드에 계정 잠금 해제 요청으로 비밀번호 검증
-      // 실제 운영 시 .env 파일의 BLOCKCHAIN_URL을 실제 네트워크 URL로 설정 필요
+      // .env 파일에서 실제 네트워크 URL 로드, 없으면 기본값 사용
       const PRIVATE_NETWORK_URL = process.env.BLOCKCHAIN_URL || 'http://192.168.1.100:8545'
 
       const response = await fetch(PRIVATE_NETWORK_URL, {
