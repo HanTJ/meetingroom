@@ -1,0 +1,153 @@
+/* CSS 애니메이션 정의 */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-10px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-5px);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(5px);
+  }
+}
+
+/* 애니메이션 클래스 */
+.animations-enabled .fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animations-enabled .slide-in-left {
+  animation: slideInLeft 0.5s ease-out;
+}
+
+.animations-enabled .slide-in-right {
+  animation: slideInRight 0.5s ease-out;
+}
+
+.animations-enabled .scale-in {
+  animation: scaleIn 0.4s ease-out;
+}
+
+.animations-enabled .bounce {
+  animation: bounce 1s ease-out;
+}
+
+.animations-enabled .pulse {
+  animation: pulse 2s infinite;
+}
+
+.animations-enabled .rotate {
+  animation: rotate 2s linear infinite;
+}
+
+/* 호버 애니메이션 */
+.animations-enabled .hover-bounce:hover {
+  animation: bounce 0.6s ease-out;
+}
+
+.animations-enabled .hover-scale:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+.animations-enabled .hover-shake:hover {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* 애니메이션 속도 조절 */
+.animations-enabled.speed-slow * {
+  animation-duration: calc(var(--animation-duration, 1s) * 2) !important;
+}
+
+.animations-enabled.speed-fast * {
+  animation-duration: calc(var(--animation-duration, 1s) * 0.5) !important;
+}
+
+/* 트랜지션 */
+.smooth-transition {
+  transition: all 0.3s ease;
+}
+
+/* 비활성화 상태 */
+.animations-disabled * {
+  animation: none !important;
+  transition: none !important;
+}

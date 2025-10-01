@@ -1,0 +1,590 @@
+/* 블록체인 페이지 스타일 */
+.blockchain-page {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.blockchain-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.blockchain-header h2 {
+  color: #333;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+}
+
+.blockchain-header p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* KJB 토큰 잔액 조회 섹션 */
+.wallet-balance-section {
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.wallet-balance-section h3 {
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+/* 입력 그룹 */
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.input-with-button {
+  display: flex;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+.input-with-button input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.input-with-button input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.input-with-button input.error {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.input-with-button input::placeholder {
+  color: #999;
+}
+
+/* 버튼 스타일 */
+.check-btn, .clear-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+.check-btn {
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+}
+
+.check-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #0056b3, #004494);
+  transform: translateY(-1px);
+}
+
+.check-btn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.clear-btn {
+  background: #6c757d;
+  color: white;
+}
+
+.clear-btn:hover {
+  background: #545b62;
+  transform: translateY(-1px);
+}
+
+/* 오류 메시지 */
+.error-message {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  border-left: 4px solid #dc3545;
+}
+
+/* 네트워크 정보 */
+.network-info {
+  background: #e3f2fd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  border-left: 4px solid #2196f3;
+}
+
+.network-info h4 {
+  color: #1565c0;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.info-item label {
+  font-weight: 600;
+  color: #1565c0;
+  margin-bottom: 0;
+}
+
+.info-item span {
+  color: #333;
+  font-family: 'Courier New', monospace;
+}
+
+/* 잔액 결과 */
+.balance-result {
+  background: #e8f5e8;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  border-left: 4px solid #28a745;
+}
+
+.balance-result h4 {
+  color: #155724;
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.balance-card {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.balance-main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.balance-label {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.balance-value {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #28a745;
+  font-family: 'Courier New', monospace;
+}
+
+.balance-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: #666;
+}
+
+.detail-value {
+  color: #333;
+  font-family: 'Courier New', monospace;
+  word-break: break-all;
+  text-align: right;
+  flex: 1;
+  margin-left: 1rem;
+}
+
+/* 초기 지급 섹션 */
+.claim-section {
+  background: #e8f5e8;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  border-left: 4px solid #28a745;
+  text-align: center;
+}
+
+.claim-section h4 {
+  color: #155724;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.claim-section p {
+  color: #155724;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.claim-btn {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.875rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+.claim-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #218838, #1ea76a);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(40, 167, 69, 0.4);
+}
+
+.claim-btn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* KJB 송금 섹션 */
+.transfer-section {
+  background: #fff3cd;
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #ffc107;
+}
+
+.transfer-section h3 {
+  color: #856404;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+/* 송금 폼 */
+.transfer-form {
+  background: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-row {
+  margin-bottom: 1.5rem;
+}
+
+.form-row.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.form-row:last-child {
+  margin-bottom: 0;
+}
+
+.transfer-form .input-group {
+  margin-bottom: 0;
+}
+
+.transfer-form input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.transfer-form input:focus {
+  outline: none;
+  border-color: #ffc107;
+  box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.1);
+}
+
+.transfer-form input.error {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.transfer-form input.readonly {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  cursor: not-allowed;
+}
+
+.transfer-form input[type="password"] {
+  font-family: 'Courier New', monospace;
+  letter-spacing: 2px;
+}
+
+
+/* 폼 액션 버튼 */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.transfer-btn {
+  flex: 1;
+  min-width: 150px;
+  padding: 0.875rem 1.5rem;
+  background: linear-gradient(135deg, #ffc107, #ff8f00);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.transfer-btn:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ff8f00, #e65100);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(255, 193, 7, 0.4);
+}
+
+.transfer-btn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.transfer-btn:disabled::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: loading 1.5s infinite;
+}
+
+/* 성공 메시지 */
+.success-message {
+  background: #d4edda;
+  color: #155724;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  margin-top: 1.5rem;
+  border-left: 4px solid #28a745;
+}
+
+.success-message pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: inherit;
+  line-height: 1.6;
+}
+
+.transaction-info {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #c3e6cb;
+}
+
+.transaction-info p {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.transaction-info code {
+  display: block;
+  background: #f8f9fa;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  word-break: break-all;
+  color: #495057;
+  border: 1px solid #dee2e6;
+}
+
+/* 블록체인 정보 */
+.blockchain-info {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.blockchain-info h3 {
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.info-box {
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  border-left: 4px solid #6c757d;
+}
+
+.info-box p {
+  margin-bottom: 0.75rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+.info-box p:last-child {
+  margin-bottom: 0;
+}
+
+.info-box strong {
+  color: #495057;
+  font-weight: 600;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+  .blockchain-page {
+    padding: 1rem;
+  }
+
+  .wallet-balance-section,
+  .blockchain-info,
+  .transfer-section {
+    padding: 1.5rem;
+  }
+
+  .input-with-button {
+    flex-direction: column;
+  }
+
+  .input-with-button input {
+    margin-bottom: 0.5rem;
+  }
+
+  .balance-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .balance-value {
+    font-size: 1.5rem;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .detail-value {
+    margin-left: 0;
+    margin-top: 0.25rem;
+    text-align: left;
+  }
+
+  /* 송금 폼 반응형 */
+  .form-row.two-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .transfer-btn {
+    min-width: auto;
+  }
+
+  .transfer-form {
+    padding: 1rem;
+  }
+}
+
+/* 애니메이션 */
+.balance-result,
+.network-info {
+  animation: slideInUp 0.3s ease-out;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 로딩 상태 */
+.check-btn:disabled {
+  position: relative;
+  overflow: hidden;
+}
+
+.check-btn:disabled::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}

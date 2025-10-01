@@ -1,0 +1,9 @@
+{
+  "contractAddress": "0x6B609b1Da84D73bA344d9E45Ebabf852D4CA6471",
+  "deployer": "0xB616BdEf465ce42c60Afc7c7a49BFF06D5557DCF",
+  "deploymentTime": "2025-09-30T02:19:11.556Z",
+  "network": "development",
+  "tokenName": "KJB Stable Coin",
+  "tokenSymbol": "KJB",
+  "initialGrant": "1000"
+}
