@@ -61,6 +61,9 @@ const BlockchainPage = () => {
     setHasClaimedGrant(false)
 
     try {
+      // 지갑 주소 체크섬 검증
+      const checksumWalletAddress = ethers.getAddress(walletAddress)
+
       const provider = new ethers.JsonRpcProvider(PRIVATE_NETWORK_URL)
 
       // 네트워크 정보 확인
@@ -70,22 +73,22 @@ const BlockchainPage = () => {
       }
 
       // ETH 잔액 조회
-      const ethBalanceWei = await provider.getBalance(walletAddress)
+      const ethBalanceWei = await provider.getBalance(checksumWalletAddress)
       const ethBalanceEther = ethers.formatEther(ethBalanceWei)
 
       // KJB 컨트랙트 인스턴스 생성
       // .env 파일에서 실제 컨트랙트 주소 로드, 없으면 기본값 사용
       const contractAddress = import.meta.env.VITE_KJB_CONTRACT_ADDRESS || KJBContract.address
       // 체크섬 주소로 변환 (대소문자 정규화)
-      const checksumAddress = ethers.getAddress(contractAddress)
-      const kjbContract = new ethers.Contract(checksumAddress, KJBContract.abi, provider)
+      const checksumContractAddress = ethers.getAddress(contractAddress)
+      const kjbContract = new ethers.Contract(checksumContractAddress, KJBContract.abi, provider)
 
       // KJB 잔액 조회
-      const kjbBalanceWei = await kjbContract.balanceOf(walletAddress)
+      const kjbBalanceWei = await kjbContract.balanceOf(checksumWalletAddress)
       const kjbBalanceFormatted = ethers.formatEther(kjbBalanceWei)
 
       // 초기 지급 여부 확인
-      const hasReceived = await kjbContract.hasClaimedInitialGrant(walletAddress)
+      const hasReceived = await kjbContract.hasClaimedInitialGrant(checksumWalletAddress)
 
       // 컨트랙트 통계 조회
       const stats = await kjbContract.getStats()
@@ -130,6 +133,9 @@ const BlockchainPage = () => {
     setClaimSuccess('')
 
     try {
+      // 지갑 주소 체크섬 검증
+      const checksumWalletAddress = ethers.getAddress(walletAddress)
+
       // 계정 잠금 해제 (패스워드 필요)
       const password = prompt('계정 비밀번호를 입력하세요:')
       if (!password) {
@@ -143,7 +149,7 @@ const BlockchainPage = () => {
         body: JSON.stringify({
           jsonrpc: '2.0',
           method: 'personal_unlockAccount',
-          params: [walletAddress, password, 300],
+          params: [checksumWalletAddress, password, 300],
           id: 1
         })
       })
@@ -155,10 +161,10 @@ const BlockchainPage = () => {
 
       // KJB 컨트랙트와 상호작용
       const provider = new ethers.JsonRpcProvider(PRIVATE_NETWORK_URL)
-      const signer = await provider.getSigner(walletAddress)
+      const signer = await provider.getSigner(checksumWalletAddress)
       const contractAddress = import.meta.env.VITE_KJB_CONTRACT_ADDRESS || KJBContract.address
-      const checksumAddress = ethers.getAddress(contractAddress)
-      const kjbContract = new ethers.Contract(checksumAddress, KJBContract.abi, signer)
+      const checksumContractAddress = ethers.getAddress(contractAddress)
+      const kjbContract = new ethers.Contract(checksumContractAddress, KJBContract.abi, signer)
 
       // 초기 지급 실행
       const tx = await kjbContract.claimInitialGrant()
@@ -219,6 +225,10 @@ const BlockchainPage = () => {
     setTransactionHash('')
 
     try {
+      // 주소 체크섬 검증
+      const checksumFromAddress = ethers.getAddress(transferForm.fromAddress)
+      const checksumToAddress = ethers.getAddress(transferForm.toAddress)
+
       // 계정 잠금 해제
       const unlockResponse = await fetch(PRIVATE_NETWORK_URL, {
         method: 'POST',
@@ -226,7 +236,7 @@ const BlockchainPage = () => {
         body: JSON.stringify({
           jsonrpc: '2.0',
           method: 'personal_unlockAccount',
-          params: [transferForm.fromAddress, transferForm.password, 300],
+          params: [checksumFromAddress, transferForm.password, 300],
           id: 2
         })
       })
@@ -238,13 +248,13 @@ const BlockchainPage = () => {
 
       // KJB 전송
       const provider = new ethers.JsonRpcProvider(PRIVATE_NETWORK_URL)
-      const signer = await provider.getSigner(transferForm.fromAddress)
+      const signer = await provider.getSigner(checksumFromAddress)
       const contractAddress = import.meta.env.VITE_KJB_CONTRACT_ADDRESS || KJBContract.address
-      const checksumAddress = ethers.getAddress(contractAddress)
-      const kjbContract = new ethers.Contract(checksumAddress, KJBContract.abi, signer)
+      const checksumContractAddress = ethers.getAddress(contractAddress)
+      const kjbContract = new ethers.Contract(checksumContractAddress, KJBContract.abi, signer)
 
       // 잔액 확인
-      const balance = await kjbContract.balanceOf(transferForm.fromAddress)
+      const balance = await kjbContract.balanceOf(checksumFromAddress)
       const balanceEther = ethers.formatEther(balance)
 
       if (parseFloat(balanceEther) < parseFloat(transferForm.amount)) {
@@ -253,7 +263,7 @@ const BlockchainPage = () => {
 
       // KJB 전송 실행
       const amountWei = ethers.parseEther(transferForm.amount)
-      const tx = await kjbContract.transfer(transferForm.toAddress, amountWei, {
+      const tx = await kjbContract.transfer(checksumToAddress, amountWei, {
         gasLimit: transferForm.gasLimit,
         gasPrice: ethers.parseUnits(transferForm.gasPrice, 'gwei')
       })
